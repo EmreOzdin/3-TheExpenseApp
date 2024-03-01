@@ -1,0 +1,11 @@
+import { View, Text } from "react-native";
+function ExpensesSummary() {
+  return (
+    <View>
+      <Text>Last 7 seven Days</Text>
+      <Text>$177.95</Text>
+    </View>
+  );
+}
+
+export default ExpensesSummary;
