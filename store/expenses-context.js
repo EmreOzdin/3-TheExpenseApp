@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
 
 export const ExpensesContext = createContext({
   expenses: [],
@@ -20,7 +21,7 @@ function expensesReducer(state, action) {
       const updatedItem = { ...updatableExpense, ...action.payload.data };
       const updateExpenses = [...state];
       updateExpenses[updatableExpenseIndex] = updatedItem;
-      return updatedExpenses;
+      return updateExpenses;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
     default:
@@ -42,9 +43,15 @@ function ExpensesContextProvider({ children }) {
   function updateExpense(id, expenseData) {
     dispatch({ type: "UPDATE", payload: { id, expenseData } });
   }
+  const value = {
+    expenses: expensesState,
+    addExpense: addExpense,
+    deleteExpense: deleteExpense,
+    updateExpense: updateExpense,
+  };
 
   return (
-    <ExpensesContextProvider.Provider>
+    <ExpensesContextProvider.Provider value={value}>
       {children}
     </ExpensesContextProvider.Provider>
   );
