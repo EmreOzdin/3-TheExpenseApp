@@ -1,11 +1,11 @@
-import { StyleSheet, TextInput, View } from "react-native";
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 
-import ExpenseForm from "../components/ManageExpense/ExpenseForm";
-import { GlobalStyles } from "../constants/styles";
-import IconButton from "../components/UI/IconButton";
-import Button from "../components/UI/Button";
-import { ExpensesContext } from "../store/expenses-context";
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import Button from '../components/UI/Button';
+import IconButton from '../components/UI/IconButton';
+import { GlobalStyles } from '../constants/styles';
+import { ExpensesContext } from '../store/expenses-context';
 
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
@@ -19,7 +19,7 @@ function ManageExpense({ route, navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: isEditing ? "Edit Expense" : "Add Expense",
+      title: isEditing ? 'Edit Expense' : 'Add Expense',
     });
   }, [navigation, isEditing]);
 
@@ -27,9 +27,11 @@ function ManageExpense({ route, navigation }) {
     expensesCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
   }
+
   function cancelHandler() {
     navigation.goBack();
   }
+
   function confirmHandler(expenseData) {
     if (isEditing) {
       expensesCtx.updateExpense(editedExpenseId, expenseData);
@@ -42,7 +44,7 @@ function ManageExpense({ route, navigation }) {
   return (
     <View style={styles.container}>
       <ExpenseForm
-        submitButtonLabel={isEditing ? "Update" : "Add"}
+        submitButtonLabel={isEditing ? 'Update' : 'Add'}
         onSubmit={confirmHandler}
         onCancel={cancelHandler}
         defaultValues={selectedExpense}
@@ -74,6 +76,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     borderTopWidth: 2,
     borderTopColor: GlobalStyles.colors.primary200,
-    alignItems: "center",
+    alignItems: 'center',
   },
 });
